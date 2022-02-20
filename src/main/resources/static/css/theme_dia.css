@@ -1,0 +1,15 @@
+.nav-fondo {
+    background-color: white !important;
+}
+
+.nav-opcion {
+    color: black !important;
+}
+
+.nav-busqueda {
+    box-shadow: 0 0 0 0.1rem whitesmoke !important;
+}
+
+.nav-listado-opcion {
+    color: black !important;
+}

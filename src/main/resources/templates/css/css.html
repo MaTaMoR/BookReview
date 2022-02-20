@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="css">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/styles.css" type="text/css" rel="stylesheet">
+    <link href="/webjars/bootstrap/5.1.2/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/webjars/bootstrap/5.1.2/" type="text/css" rel="stylesheet">
+    <link href="/webjars/font-awesome/5.15.4/css/fontawesome.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Comprobaciones del theme de la pagina -->
+    <th:block th:with="mes=${#dates.month(#dates.createNow)},dia=${#dates.day(#dates.createNow)}">
+        <th:block th:unless="${(mes == 12 && dia >= 25) || (mes == 1 && dia < 7)}" th:with="hora=${#dates.hour(#dates.createNow())}">
+            <!-- Si es de noche -->
+            <link href="/css/theme_noche.css" type="text/css" rel="stylesheet" th:if="${hora >= 20 || hora < 6}">
+            <!-- Si es de dia -->
+            <link href="/css/theme_dia.css" type="text/css" rel="stylesheet" th:unless="${hora >= 20 || hora < 6}">
+        </th:block>
+    </th:block>
+</div>
+</body>
+</html>

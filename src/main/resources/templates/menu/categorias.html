@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="categorias">
+    <div class="container">
+        <section class="py-5">
+            <h1 class="text-center">Categorias</h1>
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5" th:each="categoria : ${categorias}">
+                        <div class="col mb-5">
+                            <div class="card">
+                                <!-- Product image-->
+                                <a th:href="@{/categorias/{id}(id=${categoria.id})}">
+                                    <img class="card-img-top libro" th:src="${categoria.imagen}"/>
+                                </a>
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <a th:href="@{/categorias/{id}(id=${categoria.id})}">
+                                            <h5 class="fw-bolder" th:text="${categoria.nombre}"></h5>
+                                        </a>
+
+                                        <span th:text="${categoria.descripcion}"></span>
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto" th:href="@{/categorias/{id}(id=${categoria.id})}">Buscar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>

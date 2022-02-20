@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="libros">
+    <div class="container">
+        <section class="py-5">
+            <!-- En caso de que se busca una categoria -->
+            <th:block th:if="${categoria != null}">
+                <h1 class="text-center" th:text="${'Categoria: ' + categoria.nombre}"></h1>
+            </th:block>
+
+            <!-- En caso de que se busca una editorial -->
+            <th:block th:if="${editorial != null}">
+                <h1 class="text-center" th:text="${'Editorial: ' + editorial.nombre}"></h1>
+            </th:block>
+
+            <!-- En caso de que se busque un autor -->
+            <th:block th:if="${autor != null}">
+                <h1 class="text-center" th:text="${'Autor: ' + autor.nombre}"></h1>
+            </th:block>
+
+            <!-- En caso de que se busque tipo de libro -->
+            <th:block th:if="${tipoLibro != null}">
+                <h1 class="text-center" th:text="${'Tipo de libro: ' + tipoLibro.getNombre()}"></h1>
+            </th:block>
+
+            <!-- En caso de que sea una busqueda -->
+            <th:block th:if="${busqueda != null}">
+                <h1 class="text-center" th:text="${'Búsqueda: ' + busqueda}"></h1>
+            </th:block>
+
+            <!-- En caso de que sea la página principal -->
+            <th:block th:if="${busqueda == null && categoria == null && editorial == null && autor == null && tipoLibro == null}">
+                <h1 class="text-center">Libros</h1>
+            </th:block>
+
+            <th:block th:if="${libros.isEmpty()}">
+                <h1 class="text-center">¡No hay ningún libro!</h1>
+            </th:block>
+
+            <th:block th:unless="${libros.isEmpty()}">
+                <div class="container px-4 px-lg-5 mt-5">
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <div class="col mb-5" th:each="libro : ${libros}">
+                            <div class="col mb-5" th:href="@{/libros/{id}(id=${libro.id})}">
+                                <div class="card">
+                                    <!-- Libro image-->
+                                    <a th:href="@{/libros/{id}(id=${libro.id})}">
+                                        <img class="card-img-top libro" th:src="${libro.imagen}" alt="imagen_libro"/>
+                                    </a>
+
+                                    <!-- Libro details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Libro name-->
+                                            <a th:href="@{/libros/{id}(id=${libro.id})}">
+                                                <h5 class="fw-bolder" th:text="${libro.titulo}"></h5>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" th:href="@{/libros/{id}(id=${libro.id})}">Información</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </section>
+    </div>
+</div>
+</body>

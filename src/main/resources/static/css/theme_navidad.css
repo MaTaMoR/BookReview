@@ -1,0 +1,44 @@
+body {
+    background-color: red !important;
+    color: black !important;
+}
+
+.nav-opcion {
+    color: white !important;
+}
+
+.nav-busqueda {
+    box-shadow: 0 0 0 0.1rem whitesmoke !important;
+}
+
+.nav-busqueda-boton {
+    background-color: lightgreen !important;
+    box-shadow: 0 0 0 0.1rem lawngreen !important;
+}
+
+.nav-carrito {
+    background-color: whitesmoke !important;
+    box-shadow: 0 0 0 0.1rem whitesmoke !important;
+}
+
+.nav-listado {
+    background-color: whitesmoke !important;
+    box-shadow: 0 0 0 0.1rem gold !important;
+}
+
+.nav-listado-opcion {
+    color: black !important;
+}
+
+/* OPCIONES CSS DEL BANNER */
+
+h1 {
+    color: white !important;
+}
+
+h4 {
+    color: white !important;
+}
+.card {
+    background-color: #C0C0C0 !important;
+}

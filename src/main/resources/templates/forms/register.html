@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="register">
+<div class="container">
+    <form th:action="@{/auth/register/submit}" th:object="${usuario}" method="post" id="register_form" role="form">
+        <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" class="form-control required" id="username" placeholder="Nombre de usuario" th:field="*{username}">
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control required" id="nombre" placeholder="Tu nombre" th:field="*{nombre}">
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control required" id="apellidos" placeholder="Tus apellidos" th:field="*{apellidos}">
+        </div>
+        <div class="form-group">
+            <label for="email">Corre electrónico</label>
+            <input type="email" class="form-control required" id="email" aria-describedby="emailHelp" placeholder="Correo electrónico" th:field="*{email}">
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control required" id="password" placeholder="Contraseña" th:field="*{password}">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Registrarme</button>
+    </form>
+</div>
+</div><!-- /.container -->
+</body>
