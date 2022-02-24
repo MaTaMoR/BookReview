@@ -6,7 +6,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,7 +19,7 @@ public class Review {
 
     @NotNull
     @ManyToOne
-    private Usuario usuario;
+    private Usuario autor;
 
     @NotNull
     @ManyToOne
@@ -37,8 +36,7 @@ public class Review {
     private String imagen;
 
     @NotNull
-    @OneToOne
-    private Puntuacion puntuacion;
+    private int puntuacion;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -48,8 +46,8 @@ public class Review {
 
     }
 
-    public Review(Usuario usuario, Libro libro, String titulo, String review, String imagen, Puntuacion puntuacion) {
-        this.usuario = usuario;
+    public Review(Usuario autor, Libro libro, String titulo, String review, String imagen, int puntuacion) {
+        this.autor = autor;
         this.libro = libro;
         this.titulo = titulo;
         this.review = review;
@@ -61,12 +59,12 @@ public class Review {
         return id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getAutor() {
+        return autor;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setAutor(Usuario usuario) {
+        this.autor = usuario;
     }
 
     public Libro getLibro() {
@@ -101,11 +99,11 @@ public class Review {
         this.imagen = imagen;
     }
 
-    public Puntuacion getPuntuacion() {
+    public int getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(Puntuacion puntuacion) {
+    public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
 
@@ -135,7 +133,7 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", usuario=" + usuario +
+                ", usuario=" + autor +
                 ", libro=" + libro +
                 ", titulo='" + titulo + '\'' +
                 ", review='" + review + '\'' +

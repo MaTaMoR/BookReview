@@ -25,6 +25,10 @@ public class LibroService {
         return this.libroRepository.findById(id).orElse(null);
     }
 
+    public Libro findByTitulo(String titulo) {
+        return this.libroRepository.findByTitulo(titulo);
+    }
+
     public List<Libro> findByTipoLibro(Libro.TipoLibro tipoLibro) {
         return this.libroRepository.findByTipoLibro(tipoLibro);
     }
@@ -47,5 +51,9 @@ public class LibroService {
 
     public List<Libro> findAll(Specification<Libro> specification) {
         return this.libroRepository.findAll(specification);
+    }
+
+    public void delete(Libro libro) {
+        this.libroRepository.delete(libro);
     }
 }

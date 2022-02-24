@@ -1,10 +1,12 @@
 package me.matamor.bookreview;
 
+import me.matamor.bookreview.configs.ConfiguracionServidor;
 import me.matamor.bookreview.modelos.*;
 import me.matamor.bookreview.servicios.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import java.text.ParseException;
@@ -13,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
+@EnableConfigurationProperties(ConfiguracionServidor.class)
 public class BookReviewApplication {
 
     public static void main(String[] args) {
@@ -28,7 +31,7 @@ public class BookReviewApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(CategoriaService categoriaService, EditorialService editorialService, AutorService autorService,
+    public CommandLineRunner initData(CategoriaService categoriaService, EditorialService editorialService, AutorService autorService, PuntuacionesService puntuacionesService,
                                       LibroService libroService, PuntuacionService puntuacionService, UsuarioService usuarioService, ReviewService reviewService) {
         return args -> {
             //Insertamos unas categorias
@@ -52,20 +55,22 @@ public class BookReviewApplication {
                     "https://www.bubok.es/libro/portadaLibro/221676/1/La-mano-del-arquero.jpg",
                     emmaBallan,
                     bubok,
-                    List.of(novela, accion, romance)));
+                    List.of(novela, accion)));
 
             //Creamos un usuario fake
             Usuario usuario = usuarioService.registrar(new Usuario("matamor", "Santiago", "Gonzalez Londoño", "test", "matamor98@hotmail.com", "1234"));
 
-            Puntuacion puntuacion = puntuacionService.insertar(new Puntuacion(libro, usuario, 5));
+            Puntuaciones puntuaciones = puntuacionesService.insertar(new Puntuaciones(usuario.getId()));
+            Puntuacion puntuacion = puntuacionService.insertar(new Puntuacion(puntuaciones.getId(), usuario.getId(), 5));
 
-            libro.getPuntuaciones().add(puntuacion);
+            puntuaciones.getEntries().add(puntuacion);
+
+            puntuacionesService.insertar(puntuaciones);
+
+            libro.setPuntuacion(puntuaciones);
             libroService.insertar(libro);
 
-            Puntuacion puntuacionReview = puntuacionService.insertar(new Puntuacion(libro, usuario, 5));
-
-            Review review = reviewService.insertar(new Review(usuario, libro, "Demasiado Perfecto", "Ninguna vida puede considerarse perfecta, pero para Abbey, es como si estuviera pagando los karmas de todos sus antepasados y esto es debido a una serie de infortunios que parece que se convirtieran peor que el anterior. Nathan es la perfección andante. No solo es su físico que atrae las miradas de las mujeres y la envidia de los hombres, sino su éxito profesional. Todo lo que se propone lo logra, pero ¿hasta dónde estaría dispuesto a llegar para conseguir sus objetivos?  Ya es difícil intentar sobrellevar la situación de un corazón roto de Abbey pero como las desgracias nunca llegan solas, de todos los lugares de la ciudad de Nueva York como es posible que coincidiera con quienes la traicionaron y para ponerle más limón a la herida que se vean tal felices juntos, es como si ella nunca hubiera existido. En definitiva su día no puede ir para peor, pero bien dicen que en medio de la tormenta viene la calma y será Nathan quien le ayudará un poco a salir de tan penosa situación. Lo que ella nunca se imaginó es que el remedio fuera peor que la enfermedad y se encuentre con que sea él que le pida una cita en condiciones.  Obviamente después de semejante chasco amoroso su cuota de hombres ha llegado a su fin y lo que menos que desea es volver a sufrir por amor, pero como es posible que sin que lo esperara, tenerlo cerca hace que se forme un huracán en medio de su corazón y sus piernas, porque es imposible que alguien como él pueda estar interesado en alguien como ella. ¿Será posible que un playboy y una chica que ya no cree en el felices para siempre puedan estar juntos?  Una historia que demuestra que los sentimientos que se sienten con el corazón son perfectos, porque cuando tu corazón se enamora de verdad es cuando aprendes que todas esas imperfecciones se convierten en perfectas para ti.", "https://i.imgur.com/YUt5EVO.jpg", puntuacionReview));
-
+            Review review = reviewService.insertar(new Review(usuario, libro, "Demasiado Perfecto", "Ninguna vida puede considerarse perfecta, pero para Abbey, es como si estuviera pagando los karmas de todos sus antepasados y esto es debido a una serie de infortunios que parece que se convirtieran peor que el anterior. Nathan es la perfección andante. No solo es su físico que atrae las miradas de las mujeres y la envidia de los hombres, sino su éxito profesional. Todo lo que se propone lo logra, pero ¿hasta dónde estaría dispuesto a llegar para conseguir sus objetivos?  Ya es difícil intentar sobrellevar la situación de un corazón roto de Abbey pero como las desgracias nunca llegan solas, de todos los lugares de la ciudad de Nueva York como es posible que coincidiera con quienes la traicionaron y para ponerle más limón a la herida que se vean tal felices juntos, es como si ella nunca hubiera existido. En definitiva su día no puede ir para peor, pero bien dicen que en medio de la tormenta viene la calma y será Nathan quien le ayudará un poco a salir de tan penosa situación. Lo que ella nunca se imaginó es que el remedio fuera peor que la enfermedad y se encuentre con que sea él que le pida una cita en condiciones.  Obviamente después de semejante chasco amoroso su cuota de hombres ha llegado a su fin y lo que menos que desea es volver a sufrir por amor, pero como es posible que sin que lo esperara, tenerlo cerca hace que se forme un huracán en medio de su corazón y sus piernas, porque es imposible que alguien como él pueda estar interesado en alguien como ella. ¿Será posible que un playboy y una chica que ya no cree en el felices para siempre puedan estar juntos?  Una historia que demuestra que los sentimientos que se sienten con el corazón son perfectos, porque cuando tu corazón se enamora de verdad es cuando aprendes que todas esas imperfecciones se convierten en perfectas para ti.", "https://i.imgur.com/YUt5EVO.jpg", 5));
         };
     }
 }

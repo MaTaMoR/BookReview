@@ -31,6 +31,16 @@ public class Libro {
         public String getNombre() {
             return this.nombre;
         }
+
+        public static TipoLibro getByNombre(String nombre) {
+            for (TipoLibro tipoLibro : values()) {
+                if (tipoLibro.getNombre().equalsIgnoreCase(nombre)) {
+                    return tipoLibro;
+                }
+            }
+
+            return null;
+        }
     }
 
     @Id
@@ -42,7 +52,7 @@ public class Libro {
     private String titulo;
 
     @NotBlank
-    @Size(min = 3, max = 5000)
+    @Size(max = 5000)
     private String descripcion;
 
     @NotNull
@@ -70,9 +80,8 @@ public class Libro {
     @ManyToMany
     private List<Categoria> categorias;
 
-    @NotNull
-    @OneToMany
-    private List<Puntuacion> puntuaciones;
+    @OneToOne
+    private Puntuaciones puntuacion;
 
     public Libro() {
 
@@ -88,11 +97,14 @@ public class Libro {
         this.autor = autor;
         this.editorial = editorial;
         this.categorias = categorias;
-        this.puntuaciones = new ArrayList<>();
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -167,25 +179,16 @@ public class Libro {
         this.categorias = categorias;
     }
 
-    public List<Puntuacion> getPuntuaciones() {
-        return puntuaciones;
+    public boolean tienePuntuacion() {
+        return this.puntuacion != null;
     }
 
-    public void setPuntuaciones(List<Puntuacion> puntuaciones) {
-        this.puntuaciones = puntuaciones;
+    public Puntuaciones getPuntuacion() {
+        return puntuacion;
     }
 
-    public int contarPuntuaciones() {
-        return this.puntuaciones.size();
-    }
-
-    public int calcularMediaPuntuaciones() {
-        if (this.puntuaciones.isEmpty()) {
-            return -1;
-        }
-
-        return this.puntuaciones.stream()
-                .mapToInt(Puntuacion::getPuntuacion).sum() / this.puntuaciones.size();
+    public void setPuntuacion(Puntuaciones puntuaciones) {
+        this.puntuacion = puntuaciones;
     }
 
     @Override
@@ -214,7 +217,7 @@ public class Libro {
                 ", autor=" + autor +
                 ", editorial=" + editorial +
                 ", categorias=" + categorias +
-                ", puntuaciones=" + puntuaciones +
+                ", puntuaciones=" + puntuacion +
                 '}';
     }
 }

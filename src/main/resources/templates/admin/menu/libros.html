@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="libros">
+<div class="container">
+  <div class="text-center pt-1 pb-5" th:if="${message != null}">
+    <h2 th:text="${message}"></h2>
+  </div>
+  <th:block th:if="${libros.size() > 0}">
+    <!-- Si tu carrito tiene cosas dentro -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Titulo</th>
+        <th>Autor</th>
+        <th>Categorias</th>
+        <th>Tipo de libro</th>
+        <th>Páginas</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="libro : ${libros}">
+        <td><img class="icono-listado" th:src="${libro.imagen}" alt="admin-libro" width="64px" height="64px"></td>
+        <td th:text="${libro.titulo}"></td>
+        <td><a th:text="${libro.autor.getFullNombre()}" th:href="@{/autores/{id}(id=${libro.autor.id})}"/></td>
+        <td>
+          <th:block th:each="categoria: ${libro.categorias}">
+            <a th:text="${categoria.nombre}" th:href="@{/categorias/{id}(id=${categoria.id})}"></a>
+          </th:block>
+        </td>
+        <td><a th:text="${libro.tipoLibro.getNombre()}" th:href="@{/tipolibros/{tipoLibro}(tipoLibro=${libro.tipoLibro})}"/></td>
+        <td th:text="${libro.numeroPaginas}" class="text-center"></td>
+        <td>
+          <a th:href="@{/libros/{id}(id=${libro.id})}" class="fw-bold">Ver</a>
+          <a th:href="@{/admin/libro/edit/{id}(id=${libro.id})}" class="fw-bold">Editar</a>
+          <a th:href="@{/admin/libro/unbind/{id}(id=${libro.id})}" class="fw-bold">Desasignar</a>
+          <a th:href="@{/admin/libro/delete/{id}(id=${libro.id})}" class="fw-bold">Borrar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </th:block>
+
+  <div th:if="${libros.isEmpty()}">
+    <h4 class="text-center">No existe ninguna libro</h4>
+  </div>
+
+  <!-- Botón para crear una libro -->
+  <form style="display: inline; float: right" th:action="@{/admin/libro/new}">
+    <button type="submit" class="btn btn-warning float-right text-right">Nueva libro</button>
+  </form>
+
+  <!-- Botón para volver -->
+  <form style="display: inline; float: left" th:action="@{/admin/}">
+    <button type="submit" class="btn btn-warning float-right text-right">Volver</button>
+  </form>
+</div>
+</div>

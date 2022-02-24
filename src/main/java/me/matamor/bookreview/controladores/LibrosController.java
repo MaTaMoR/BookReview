@@ -44,6 +44,7 @@ public class LibrosController {
             libros = this.libroService.findAll();
         }
 
+        model.addAttribute("titulo", "Libros");
         model.addAttribute("libros", libros);
 
         return "libros";
@@ -56,6 +57,7 @@ public class LibrosController {
             return "redirect:/libros/";
         }
 
+        model.addAttribute("titulo", libro.getTitulo());
         model.addAttribute("libro", libro);
 
         return "libro";

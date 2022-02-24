@@ -13,4 +13,10 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
     @Query("SELECT a FROM Autor a WHERE LOWER(a.nombre) = LOWER(:nombre) OR LOWER(a.apellidos) = LOWER(:apellidos)")
     Autor findByNombreOrApellidos(@Param("nombre") String nombre, @Param("apellidos") String apellidos);
 
+    @Query("SELECT a FROM Autor a WHERE LOWER(a.nombre) = LOWER(:nombre) AND LOWER(a.apellidos) = LOWER(:apellidos)")
+    Autor findByNombreAndApellidos(@Param("nombre") String nombre, @Param("apellidos") String apellidos);
+
+    @Query("SELECT a FROM Autor a WHERE CONCAT(LOWER(a.nombre), ' ', LOWER(a.apellidos)) = LOWER(:fullnombre)")
+    Autor findByFullNombre(@Param("fullnombre") String nombre);
+
 }

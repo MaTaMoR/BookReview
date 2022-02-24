@@ -1,0 +1,41 @@
+.banner {
+    background-image: url('/imagenes/home-bg-mitad.jpg');
+}
+
+.banner-mitad {
+    background-image: url('/imagenes/home-bg-mitad.jpg');
+    background-position: 100% 10%;
+}
+
+.card img {
+    height: 250px;
+    width: 100%;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 100px;
+}
+
+.container {
+    margin-bottom: 150px;
+}
+
+.pie-pagina {
+    margin-top: 100px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+a {
+    font-weight: 700 !important;
+    color: deepskyblue;
+}

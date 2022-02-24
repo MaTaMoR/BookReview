@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="BookReview"></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap core CSS -->
-    <th:block th:insert="~{css/css :: css}" />
+    <th:block th:insert="~{header/header :: header}" />
 </head>
-
 <body>
-    <th:block th:insert="~{nav/nav :: nav}"/>
+    <th:block th:insert="~{nav/nav2 :: nav}"/>
+    <th:block th:insert="~{banner/banner :: banner}"/>
     <th:block th:insert="~{menu/categorias :: categorias}"/>
     <th:block th:insert="~{footer/footer :: footer}"/>
-    <th:block th:insert="~{js/javascript :: js}"/>
+    <th:block th:insert="~{js/javascript :: javascript}"/>
 </body>
 </html>

@@ -29,7 +29,19 @@ public class AutorService {
         return this.autorRepository.findByNombreOrApellidos(nombre, apellidos);
     }
 
+    public Autor findByNombreAndApellidos(String nombre, String apellidos) {
+        return this.autorRepository.findByNombreAndApellidos(nombre, apellidos);
+    }
+
+    public Autor findByFullNombre(String fullNombre) {
+        return this.autorRepository.findByFullNombre(fullNombre);
+    }
+
     public List<Autor> findAll() {
         return this.autorRepository.findAll();
+    }
+
+    public void delete(Autor autor) {
+        this.autorRepository.delete(autor);
     }
 }

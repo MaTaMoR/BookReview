@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
-<body>
 <div th:fragment="review">
-    <div class="py-5">
-        <div class="container px-3 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6 detalle-imagen">
-                    <!-- Imagen -->
-                    <img class="card-img-top mb-5 mb-md-0" width="400px" height="800px" th:src="${review.imagen}" alt="imagen-detalle">
-                </div>
-                <div class="col-md-6">
-                    <!-- Nombre del review -->
-                    <h1 class="display-5 fw-bolder" th:text="${review.titulo}"/>
+<div class="container px-3 px-lg-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+        <!-- Nombre del review -->
+        <h1 class="display-5 fw-bolder text-center" th:text="${review.titulo}"/>
 
-                    <!-- Autor del review -->
-                    <p class="lead">Libro: <a th:text="${review.libro.titulo}" th:href="@{/libros/{id}(id=${review.libro.id})}"/></p>
+        <div class="col-md-6">
+            <!-- Imagen -->
+            <img class="card-img-top" th:src="${review.imagen}" alt="imagen-detalle">
 
-                    <!-- Puntuación de la review -->
-                    <p class="lead">
-                        Puntuación:
+            <!-- Autor del review -->
+            <p class="lead">Libro: <a th:text="${review.libro.titulo}" th:href="@{/libros/{id}(id=${review.libro.id})}"/></p>
 
-                        <th:block th:with="puntuacion=${review.getPuntuacion().getPuntuacion()}">
-                            <th:block th:each="i: ${#numbers.sequence(1, 5)}">
-                                <th:block th:if="${puntuacion} >= ${i}">
-                                    <a class="bi-star-fill"></a>
-                                </th:block>
-                                <th:block th:if="${puntuacion} < ${i}">
-                                    <a class="bi-star-fill" style="color: gray"></a>
-                                </th:block>
-                            </th:block>
+            <!-- Puntuación de la review -->
+            <p class="lead">
+                Puntuación:
+
+                <th:block th:with="puntuacion=${review.getPuntuacion()}">
+                    <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                        <th:block th:if="${puntuacion} >= ${i}">
+                            <a style="color: gold;">⭐</a>
                         </th:block>
-                    </p>
+                        <th:block th:if="${puntuacion} < ${i}">
+                            <a style="color: gray">⭐</a>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </p>
+        </div>
 
-                    <p class="lead" style="text-align: justify" th:text="${review.review}"/>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <p class="lead" style="text-align: justify" th:text="${review.review}"/>
         </div>
     </div>
 </div>
-</body>
+</div>

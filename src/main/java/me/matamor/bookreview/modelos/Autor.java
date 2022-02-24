@@ -42,6 +42,10 @@ public class Autor {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -67,7 +71,7 @@ public class Autor {
     }
 
     public boolean tieneImagen() {
-        return imagen != null;
+        return imagen != null && !imagen.isEmpty();
     }
 
     public void setImagen(String imagen) {

@@ -12,12 +12,10 @@ public class Puntuacion {
     private long id;
 
     @NotNull
-    @ManyToOne
-    private Libro libro;
+    private long puntuaciones;
 
     @NotNull
-    @ManyToOne
-    private Usuario usuario;
+    private long usuario;
 
     @NotNull
     private int puntuacion;
@@ -26,8 +24,8 @@ public class Puntuacion {
 
     }
 
-    public Puntuacion(Libro libro, Usuario usuario, int puntuacion) {
-        this.libro = libro;
+    public Puntuacion(long puntuaciones, long usuario, int puntuacion) {
+        this.puntuaciones = puntuaciones;
         this.usuario = usuario;
         this.puntuacion = puntuacion;
     }
@@ -36,19 +34,19 @@ public class Puntuacion {
         return id;
     }
 
-    public Libro getLibro() {
-        return libro;
+    public long getPuntuaciones() {
+        return puntuaciones;
     }
 
-    public void setLibro(Libro libro) {
-        this.libro = libro;
+    public void setPuntuaciones(long puntuaciones) {
+        this.puntuaciones = puntuaciones;
     }
 
-    public Usuario getUsuario() {
+    public long getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(long usuario) {
         this.usuario = usuario;
     }
 
@@ -77,7 +75,7 @@ public class Puntuacion {
     public String toString() {
         return "Puntuacion{" +
                 "id=" + id +
-                ", libro=" + libro +
+                ", libro=" + puntuaciones +
                 ", usuario=" + usuario +
                 ", puntuacion=" + puntuacion +
                 '}';

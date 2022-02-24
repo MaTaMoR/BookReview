@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
-<body>
 <div th:fragment="libro">
     <div class="py-5">
         <div class="container px-3 px-lg-5 my-5">
@@ -37,19 +36,19 @@
                     <p class="lead">
                         Puntuación:
 
-                        <th:block th:if="${libro.contarPuntuaciones() > 0}" th:with="media=${libro.calcularMediaPuntuaciones()}">
+                        <th:block th:if="${libro.tienePuntuacion()}" th:with="media=${libro.getPuntuacion().calcularMediaPuntuaciones()}">
                             <th:block th:each="i: ${#numbers.sequence(1, 5)}">
                                 <th:block th:if="${media} >= ${i}">
-                                    <a class="bi-star-fill"></a>
+                                    <a style="color: gold">⭐</a>
                                 </th:block>
                                 <th:block th:if="${media} < ${i}">
-                                    <a class="bi-star-fill" style="color: gray"></a>
+                                    <a style="color: gray">⭐</a>
                                 </th:block>
                             </th:block>
                         </th:block>
-                        <th:block th:unless="${libro.contarPuntuaciones() > 0}">
+                        <th:block th:unless="${libro.tienePuntuacion()}">
                             <th:block th:each="i: ${#numbers.sequence(1, 5)}">
-                                <a class="bi-star-fill" style="color: gray"></a>
+                                <a style="color: gray">⭐</a>
                             </th:block>
                         </th:block>
                     </p>
@@ -60,4 +59,3 @@
         </div>
     </div>
 </div>
-</body>

@@ -28,4 +28,8 @@ public class EditorialService {
     public List<Editorial> findAll() {
         return this.editorialRepository.findAll();
     }
+
+    public void delete(Editorial editorial) {
+        this.editorialRepository.delete(editorial);
+    }
 }

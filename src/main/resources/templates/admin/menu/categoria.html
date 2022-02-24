@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="categoria">
+<div class="container">
+    <div class="text-center pt-1 pb-5" th:if="${message != null}">
+        <h2 th:text="${message}"></h2>
+    </div>
+    <form class="row g-3 needs-validation" novalidate method="post" role="form" th:action="@{/admin/categoria/submit}" th:object="${categoria}">
+        <!-- Campo de id -->
+        <input id="id" type="hidden" class="form-control" name="id" placeholder="id" readonly th:value="*{id}">
+
+        <div class="col-md-4">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" required th:field="*{nombre}">
+            <div class="invalid-feedback">
+                Debes introducir el nombre de la categoría
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="descripcion" required th:field="*{descripcion}">
+            <div class="invalid-feedback">
+                Debes introducir la descripción de la categoría
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="url" class="form-control" id="imagen" required th:field="*{imagen}">
+            <div class="invalid-feedback">
+                Debes introducir la imagen de la categoría
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 control">
+                <div style="border-top: 1px solid #888; padding-top: 15px;">
+                    ¿Quieres volver al listado? Puedes hacerlo
+                    <a th:href="@{/admin/categorias}" class="fw-bold">pulsando aquí</a>!
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>

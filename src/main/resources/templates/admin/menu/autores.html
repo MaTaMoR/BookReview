@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="autores">
+  <div class="container">
+    <div class="text-center pt-1 pb-5" th:if="${message != null}">
+      <h2 th:text="${message}"></h2>
+    </div>
+    <th:block th:if="${autores.size() > 0}">
+      <!-- Si tu carrito tiene cosas dentro -->
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Accion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="autor : ${autores}">
+          <th:block th:if="${autor.tieneImagen()}">
+            <td><img class="icono-listado" th:src="${autor.imagen}" alt="admin-autor" width="64px" height="64px"></td>
+          </th:block>
+          <th:block th:unless="${autor.tieneImagen()}">
+            <td><img class="icono-listado" src="/imagenes/autor-desconocido.png" alt="admin-autor" width="64px" height="64px"></td>
+          </th:block>
+
+          <td th:text="${autor.nombre}"></td>
+          <td th:text="${autor.apellidos}"></td>
+          <td>
+            <a th:href="@{/autores/{id}(id=${autor.id})}" class="fw-bold">Ver</a>
+            <a th:href="@{/admin/autor/edit/{id}(id=${autor.id})}" class="fw-bold">Editar</a>
+            <a th:href="@{/admin/autor/unbind/{id}(id=${autor.id})}" class="fw-bold">Desasignar</a>
+            <a th:href="@{/admin/autor/delete/{id}(id=${autor.id})}" class="fw-bold">Borrar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </th:block>
+
+    <div th:if="${autores.isEmpty()}">
+      <h4 class="text-center">No existe ninguna autor</h4>
+    </div>
+
+    <!-- Botón para crear un autor -->
+    <form style="display: inline; float: right" th:action="@{/admin/autor/new}">
+      <button type="submit" class="btn btn-warning float-right text-right">Nuevo autor</button>
+    </form>
+
+    <!-- Botón para volver -->
+    <form style="display: inline; float: left" th:action="@{/admin/}">
+      <button type="submit" class="btn btn-warning float-right text-right">Volver</button>
+    </form>
+  </div>
+</div>

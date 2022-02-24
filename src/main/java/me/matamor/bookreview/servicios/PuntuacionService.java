@@ -14,4 +14,5 @@ public class PuntuacionService {
     public Puntuacion insertar(Puntuacion puntuacion) {
         return this.puntuacionRepository.save(puntuacion);
     }
+
 }

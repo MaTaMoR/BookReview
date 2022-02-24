@@ -84,6 +84,10 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
+    public String getFullNombre() {
+        return this.nombre + " " + this.apellidos;
+    }
+
     public String getAvatar() {
         return avatar;
     }

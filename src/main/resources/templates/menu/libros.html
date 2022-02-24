@@ -1,43 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<body>
 <div th:fragment="libros">
     <div class="container">
-        <section class="py-5">
-            <!-- En caso de que se busca una categoria -->
-            <th:block th:if="${categoria != null}">
-                <h1 class="text-center" th:text="${'Categoria: ' + categoria.nombre}"></h1>
-            </th:block>
-
-            <!-- En caso de que se busca una editorial -->
-            <th:block th:if="${editorial != null}">
-                <h1 class="text-center" th:text="${'Editorial: ' + editorial.nombre}"></h1>
-            </th:block>
-
-            <!-- En caso de que se busque un autor -->
-            <th:block th:if="${autor != null}">
-                <h1 class="text-center" th:text="${'Autor: ' + autor.nombre}"></h1>
-            </th:block>
-
-            <!-- En caso de que se busque tipo de libro -->
-            <th:block th:if="${tipoLibro != null}">
-                <h1 class="text-center" th:text="${'Tipo de libro: ' + tipoLibro.getNombre()}"></h1>
-            </th:block>
-
-            <!-- En caso de que sea una busqueda -->
-            <th:block th:if="${busqueda != null}">
-                <h1 class="text-center" th:text="${'Búsqueda: ' + busqueda}"></h1>
-            </th:block>
-
-            <!-- En caso de que sea la página principal -->
-            <th:block th:if="${busqueda == null && categoria == null && editorial == null && autor == null && tipoLibro == null}">
-                <h1 class="text-center">Libros</h1>
-            </th:block>
-
+        <section class="py-0">
             <th:block th:if="${libros.isEmpty()}">
                 <h1 class="text-center">¡No hay ningún libro!</h1>
             </th:block>
-
             <th:block th:unless="${libros.isEmpty()}">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -74,4 +42,3 @@
         </section>
     </div>
 </div>
-</body>

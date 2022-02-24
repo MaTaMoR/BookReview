@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="editoriales">
+<div class="container">
+  <div class="text-center pt-1 pb-5" th:if="${message != null}">
+    <h2 th:text="${message}"></h2>
+  </div>
+  <th:block th:if="${editoriales.size() > 0}">
+    <!-- Si tu carrito tiene cosas dentro -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Accion</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="editorial : ${editoriales}">
+        <td><img class="icono-listado" th:src="${editorial.imagen}" alt="admin-editorial" width="64px" height="64px"></td>
+        <td th:text="${editorial.nombre}"></td>
+        <td>
+          <a th:href="@{/editoriales/{id}(id=${editorial.id})}" class="fw-bold">Ver</a>
+          <a th:href="@{/admin/editorial/edit/{id}(id=${editorial.id})}" class="fw-bold">Editar</a>
+          <a th:href="@{/admin/editorial/unbind/{id}(id=${editorial.id})}" class="fw-bold">Desasignar</a>
+          <a th:href="@{/admin/editorial/delete/{id}(id=${editorial.id})}" class="fw-bold">Borrar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </th:block>
+
+  <div th:if="${editoriales.isEmpty()}">
+    <h4 class="text-center">No existe ninguna editorial</h4>
+  </div>
+
+  <!-- Botón para crear una editorial -->
+  <form style="display: inline; float: right" th:action="@{/admin/editorial/new}">
+    <button type="submit" class="btn btn-warning float-right text-right">Nueva editorial</button>
+  </form>
+
+  <!-- Botón para volver -->
+  <form style="display: inline; float: left" th:action="@{/admin/}">
+    <button type="submit" class="btn btn-warning float-right text-right">Volver</button>
+  </form>
+</div>
+</div>

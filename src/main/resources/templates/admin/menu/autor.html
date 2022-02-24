@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<div th:fragment="autor">
+    <div class="container">
+        <div class="text-center pt-1 pb-5" th:if="${message != null}">
+            <h2 th:text="${message}"></h2>
+        </div>
+        <form class="row g-3 needs-validation" novalidate method="post" role="form" th:action="@{/admin/autor/submit}" th:object="${autor}">
+            <!-- Campo de id -->
+            <input id="id" type="hidden" class="form-control" name="id" placeholder="id" readonly th:value="*{id}">
+
+            <div class="col-md-4">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required th:field="*{nombre}">
+                <div class="invalid-feedback">
+                    Debes introducir el nombre del autor
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" required th:field="*{apellidos}">
+                <div class="invalid-feedback">
+                    Debes introducir los apellidos del autor
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input type="url" class="form-control" id="imagen" th:field="*{imagen}">
+                <div class="invalid-feedback">
+                    Debes introducir la imagen del autor
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 control">
+                    <div style="border-top: 1px solid #888; padding-top: 15px;">
+                        ¿Quieres volver al listado? Puedes hacerlo
+                        <a th:href="@{/admin/autores}" class="fw-bold">pulsando aquí</a>!
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

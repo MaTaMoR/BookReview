@@ -18,6 +18,7 @@ public class ReviewController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("titulo", "Reviews");
         model.addAttribute("reviews", this.reviewService.findAll());
         return "reviews";
     }
@@ -29,6 +30,7 @@ public class ReviewController {
             return "redirect:/reviews/";
         }
 
+        model.addAttribute("titulo", review.getTitulo());
         model.addAttribute("review", review);
 
         return "review";

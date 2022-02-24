@@ -18,12 +18,14 @@ public class TipoLibroController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("titulo", "Tipo de libros");
         model.addAttribute("tipoLibros", Libro.TipoLibro.values());
         return "tipolibros";
     }
 
     @GetMapping("/{tipoLibro}")
     public String libros(Model model, @PathVariable("tipoLibro") Libro.TipoLibro tipoLibro) {
+        model.addAttribute("Titulo", tipoLibro.getNombre());
         model.addAttribute("tipoLibro", tipoLibro);
         model.addAttribute("libros", this.libroService.findByTipoLibro(tipoLibro));
         return "libros";
