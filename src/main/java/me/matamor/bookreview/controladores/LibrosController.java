@@ -29,6 +29,8 @@ public class LibrosController {
     public String index(Model model, @RequestParam(name = "q", required = false) String query) {
         List<Libro> libros = null;
 
+        System.out.println("input: " + query);
+
         if (query != null) {
             Specification<Libro> specification = this.searchMatcher.matchCriterios(query);
             if (specification == null) {

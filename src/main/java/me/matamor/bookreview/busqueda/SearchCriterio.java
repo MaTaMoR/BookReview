@@ -27,7 +27,12 @@ public class SearchCriterio implements Specification<Libro> {
                 return criteriaBuilder.or(criteriaBuilder.like(root.get(Libro_.TITULO), like()), criteriaBuilder.like(root.get(Libro_.DESCRIPCION), like()));
             }
             case TIPOLIBRO -> {
-                return criteriaBuilder.like(root.get(Libro_.TIPO_LIBRO), like());
+                Libro.TipoLibro tipoLibro = Libro.TipoLibro.getByNombre(this.value);
+                if (tipoLibro == null) {
+                    return criteriaBuilder.conjunction();
+                }
+
+                return criteriaBuilder.equal(root.get(Libro_.TIPO_LIBRO), tipoLibro);
             }
             case AUTOR -> {
                 Join<Libro, Autor> autorJoin = root.join(Libro_.AUTOR);
